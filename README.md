@@ -2,7 +2,7 @@
 1 December 2019
 
 ### Project Title
-Explore US Bikeshare Data
+Explore US Bikeshare Data 2017
 
 ### Description
 Complete codes to explore bike sharing data for Chicago, New York, and Washington in 2017. The data spans over 6 months from Jan to Jun.
