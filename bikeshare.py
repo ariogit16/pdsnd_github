@@ -110,18 +110,18 @@ def display_raw(city):
             print("\n")
             print(df.head(5))
             # set intial value for next set of data
-            a=4
+            start=4
 
             while True:
                 try:
                     view = str(input("Would you like to view 5 more?(Y/N)")).lower()
                     if view == "y":
                     # check if at end of data if not iterate upper bound
-                        b = a + 6
-                        print(df[a+1:b])
+                        end = start + 6
+                        print(df[start+1:end])
                         # move upper bound to lower bound -1
-                        a = b-1
-                        if b <= len(df):
+                        start = end-1
+                        if end <= len(df):
                             continue
                         else:
                             print("That was the last 5 lines of data.")
