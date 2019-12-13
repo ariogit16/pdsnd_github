@@ -94,7 +94,7 @@ def load_data(city, month, day):
         month = months.index(month)+1
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
-        
+
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
@@ -112,18 +112,20 @@ def display_raw(city):
             print("\n")
             print(df.head(5))
             # set intial value for next set of data
-            a=4 
-            
+            a=4
+
             while True:
                 try:
                     view = str(input("Would you like to view 5 more?(Y/N)")).lower()
                     if view == "y":
-                    # check if at end of data if not iterate upper bound                     
+                    # check if at end of data if not iterate upper bound
                         b = a + 6
                         print(df[a+1:b])
                         # move upper bound to lower bound -1
                         a = b-1
-                        if b <= len(df):    
+                        # check if upper bound reach the end of dataframe
+                        # continue if not, get out if yes.
+                        if b <= len(df):
                             continue
                         else:
                             print("That was the last 5 lines of data.")
@@ -134,10 +136,10 @@ def display_raw(city):
                         print("Y or y for yes and N or n for No.")
                 except ValueError:
                     print("That's not the input I expected.")
- 
+
     except ValueError:
-        print("That's not the input I expected.")                          
-                        
+        print("That's not the input I expected.")
+
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -227,7 +229,7 @@ def user_stats(df):
         print("\nThe earlierst year of birth is   --> {}".format(str(int(df['Birth Year'].min()))))
         print("The most recent year of birth is --> {}".format(str(int(df['Birth Year'].max()))))
         print("The most common year of birth is --> {}".format(str(int(df['Birth Year'].mode()[0]))))
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -238,7 +240,7 @@ def main():
         df = load_data(city, month, day)
         #in case the data is empty
         if df.empty == False:
-            display_raw(city)                 
+            display_raw(city)
             time_stats(df)
             station_stats(df)
             trip_duration_stats(df)
