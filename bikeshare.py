@@ -22,8 +22,7 @@ def get_filters():
     # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
     while True:
         try:
-            city = input("Please type a city (Chicago, New York City, Washington): ")
-            city = city.lower()
+            city = str(input("Please type a city (Chicago, New York City, Washington): ")).lower()
             if city in CITY_DATA.keys():
                 print(">>Thank You\n")
                 break
@@ -34,8 +33,7 @@ def get_filters():
     # TO DO: get user input for month (all, january, february, ... , june)
     while True:
         try:
-            month = input("Please enter a month name (january, february, etc.) or all to view all months: ")
-            month = month.lower()
+            month = str(input("Please enter a month name (january, february, etc.) or all to view all months: ")).lower()
             if month in MONTHS_LIST:
                 print(">>Got it!\n")
                 break
@@ -46,7 +44,7 @@ def get_filters():
     # TO DO: get user input for day of week (all, monday, tuesday, ... sunday)
     while True:
         try:
-            day = input("Please enter day of the week (monday, tuesday, etc.) or all to view all days: ")
+            day = str(input("Please enter day of the week (monday, tuesday, etc.) or all to view all days: ")).lower()
             day = day.lower()
             if day in DAYS_LIST:
                 print(">>Awesome!\n")
@@ -94,7 +92,7 @@ def load_data(city, month, day):
         month = months.index(month)+1
         # filter by month to create the new dataframe
         df = df[df['month'] == month]
-        
+
     # filter by day of week if applicable
     if day != 'all':
         # filter by day of week to create the new dataframe
@@ -112,18 +110,18 @@ def display_raw(city):
             print("\n")
             print(df.head(5))
             # set intial value for next set of data
-            a=4 
-            
+            a=4
+
             while True:
                 try:
                     view = str(input("Would you like to view 5 more?(Y/N)")).lower()
                     if view == "y":
-                    # check if at end of data if not iterate upper bound                     
+                    # check if at end of data if not iterate upper bound
                         b = a + 6
                         print(df[a+1:b])
                         # move upper bound to lower bound -1
                         a = b-1
-                        if b <= len(df):    
+                        if b <= len(df):
                             continue
                         else:
                             print("That was the last 5 lines of data.")
@@ -134,10 +132,10 @@ def display_raw(city):
                         print("Y or y for yes and N or n for No.")
                 except ValueError:
                     print("That's not the input I expected.")
- 
+
     except ValueError:
-        print("That's not the input I expected.")                          
-                        
+        print("That's not the input I expected.")
+
 
 def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
@@ -227,7 +225,7 @@ def user_stats(df):
         print("\nThe earlierst year of birth is   --> {}".format(str(int(df['Birth Year'].min()))))
         print("The most recent year of birth is --> {}".format(str(int(df['Birth Year'].max()))))
         print("The most common year of birth is --> {}".format(str(int(df['Birth Year'].mode()[0]))))
-        
+
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
 
@@ -238,7 +236,7 @@ def main():
         df = load_data(city, month, day)
         #in case the data is empty
         if df.empty == False:
-            display_raw(city)                 
+            display_raw(city)
             time_stats(df)
             station_stats(df)
             trip_duration_stats(df)
